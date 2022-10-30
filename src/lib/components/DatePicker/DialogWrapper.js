@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 
-const DialogWrapper = ({ children, isMobile }) => (isMobile ? createPortal(
-  <div className="react-google-flight-datepicker">
+const DialogWrapper = ({ children, isMobile, theme }) => (isMobile ? createPortal(
+  <div className={`${(theme == 'light') ? 'react-google-flight-datepicker' : 'react-google-flight-datepicker-dark'}`}>
     {children}
   </div>,
   document.querySelector('body'),
@@ -12,11 +12,13 @@ const DialogWrapper = ({ children, isMobile }) => (isMobile ? createPortal(
 DialogWrapper.propTypes = {
   children: PropTypes.node,
   isMobile: PropTypes.string,
+  theme: PropTypes.string,
 };
 
 DialogWrapper.defaultProps = {
   children: null,
   isMobile: false,
+  theme: 'light',
 };
 
 export default DialogWrapper;

@@ -6,6 +6,7 @@ import AutoSizer from 'react-virtualized-auto-sizer';
 
 import MonthCalendar from './MonthCalendar';
 import { getMonthInfo, getWeekDay } from '../../helpers';
+import { locales } from './locales';
 
 const DialogContentMobile = ({
   fromDate,
@@ -19,8 +20,16 @@ const DialogContentMobile = ({
   weekDayFormat,
   complsOpen,
   isSingle,
-  highlightToday
+  highlightToday,
+  locale,
 }) => {
+  useEffect(() => {
+    if(locales.includes(locale)){
+      require(`dayjs/locale/${locale}`);
+      dayjs.locale(locale);
+    }
+  }, []);
+
   const [rowCount, setRowCount] = useState(2400);
   const minYear = minDate ? dayjs(minDate).year() : 1900;
   const minMonth = minDate ? dayjs(minDate).month() : 0;
@@ -73,6 +82,7 @@ const DialogContentMobile = ({
           monthFormat={monthFormat}
           isSingle={isSingle}
           highlightToday={highlightToday}
+          locale={locale}
         />
       </div>
     );
@@ -104,7 +114,7 @@ const DialogContentMobile = ({
   }
 
   function generateWeekDay() {
-    const arrWeekDay = getWeekDay(startWeekDay, weekDayFormat);
+    const arrWeekDay = getWeekDay(startWeekDay, weekDayFormat, locale);
 
     return arrWeekDay.map((day, index) => (
       <div className="weekday" key={index}>{day}</div>
@@ -136,6 +146,7 @@ DialogContentMobile.propTypes = {
   complsOpen: PropTypes.bool,
   isSingle: PropTypes.bool,
   highlightToday: PropTypes.bool,
+  locale: PropTypes.string,
 };
 
 DialogContentMobile.defaultProps = {
@@ -150,6 +161,7 @@ DialogContentMobile.defaultProps = {
   complsOpen: false,
   isSingle: false,
   highlightToday: false,
+  locale: 'en',
 };
 
 export default DialogContentMobile;

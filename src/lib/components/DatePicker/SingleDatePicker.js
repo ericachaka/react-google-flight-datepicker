@@ -27,6 +27,10 @@ const SingleDatePicker = ({
   onCloseCalendar,
   singleCalendar,
   weekDayFormat,
+  resetLabel,
+  doneLabel,
+  locale,
+  theme,
 }) => {
   const [complsOpen, setComplsOpen] = useState(false);
   const containerRef = useRef(null);
@@ -141,7 +145,7 @@ const SingleDatePicker = ({
   }
 
   return (
-    <div className="react-google-flight-datepicker">
+    <div className={`${(theme == 'light') ? 'react-google-flight-datepicker' : 'react-google-flight-datepicker-dark'}`}>
       <div
         className={cx('date-picker', className, {
           disabled,
@@ -160,7 +164,7 @@ const SingleDatePicker = ({
           onFocus={onDateInputFocus}
           isSingle
         />
-        <DialogWrapper isMobile={isMobile}>
+        <DialogWrapper isMobile={isMobile} theme={theme}>
           <Dialog
             complsOpen={complsOpen}
             toggleDialog={toggleDialog}
@@ -183,6 +187,10 @@ const SingleDatePicker = ({
             isSingle
             weekDayFormat={weekDayFormat}
             singleCalendar={singleCalendar}
+            resetLabel={resetLabel}
+            doneLabel={doneLabel}
+            locale={locale}
+            theme={theme}
           />
         </DialogWrapper>
       </div>
@@ -206,7 +214,11 @@ SingleDatePicker.propTypes = {
   highlightToday: PropTypes.bool,
   isOpen: PropTypes.bool,
   onCloseCalendar: PropTypes.func,
-  singleCalendar: PropTypes.bool
+  singleCalendar: PropTypes.bool,
+  resetLabel: PropTypes.string,
+  doneLabel: PropTypes.string,
+  locale: PropTypes.string,
+  theme: PropTypes.string,
 };
 
 SingleDatePicker.defaultProps = {
@@ -225,6 +237,10 @@ SingleDatePicker.defaultProps = {
   highlightToday: false,
   isOpen: false,
   onCloseCalendar: () => {},
+  resetLabel: 'Reset',
+  doneLabel: 'Done',
+  locale: 'en',
+  theme: 'light',
 };
 
 export default SingleDatePicker;

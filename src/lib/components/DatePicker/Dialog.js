@@ -34,6 +34,11 @@ const Dialog = ({
   hideDialogFooter,
   dateInputSeperator,
   singleCalendar,
+  resetLabel,
+  doneLabel,
+  locale,
+
+  theme,
 }) => {
   const [hideAnimation, setHideAnimation] = useState(false);
   const [dateChanged, setDateChanged] = useState();
@@ -100,7 +105,7 @@ const Dialog = ({
             className="btn-outline reset-button"
             onClick={handleReset}
           >
-            Reset
+            {resetLabel}
           </button>
         </div>
         )}
@@ -122,6 +127,7 @@ const Dialog = ({
               complsOpen={complsOpen}
               isSingle={isSingle}
               highlightToday={highlightToday}
+              locale={locale}
             />
           )
           : (
@@ -142,6 +148,7 @@ const Dialog = ({
               dateChanged={dateChanged}
               highlightToday={highlightToday}
               singleCalendar={singleCalendar}
+              locale={locale}
             />
           )}
       </div>
@@ -149,14 +156,14 @@ const Dialog = ({
         && (
         <div className="dialog-footer">
           <button type="button" className="submit-button" onClick={toggleDialog} tabIndex="0">
-            Done
+            {doneLabel}
           </button>
           <button
             type="button"
             className="btn-outline reset-button mobile"
             onClick={handleReset}
           >
-            Reset
+            {resetLabel}
           </button>
         </div>
         )}
@@ -191,6 +198,11 @@ Dialog.propTypes = {
   hideDialogFooter: PropTypes.bool,
   dateInputSeperator: PropTypes.node,
   singleCalendar: PropTypes.bool,
+  resetLabel: PropTypes.string,
+  doneLabel: PropTypes.string,
+  locale: PropTypes.string,
+
+  theme: PropTypes.string,
 };
 
 Dialog.defaultProps = {
@@ -219,6 +231,11 @@ Dialog.defaultProps = {
   hideDialogHeader: false,
   hideDialogFooter: false,
   dateInputSeperator: null,
+  resetLabel: 'Reset',
+  doneLabel: 'Done',
+  locale: 'en',
+
+  theme: 'light',
 };
 
 export default Dialog;

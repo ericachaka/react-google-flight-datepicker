@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 import PrevIcon from '../../assets/svg/prev.svg';
 import NextIcon from '../../assets/svg/next.svg';
 import MonthCalendar from './MonthCalendar';
+import { locales } from './locales';
 
 const DialogContentDesktop = ({
   fromDate,
@@ -23,7 +24,15 @@ const DialogContentDesktop = ({
   dateChanged,
   highlightToday,
   singleCalendar,
+  locale,
 }) => {
+  useEffect(() => {
+    if(locales.includes(locale)){
+      require(`dayjs/locale/${locale}`);
+      dayjs.locale(locale);
+    }
+  }, []);
+  
   const containerRef = useRef();
   const [translateAmount, setTranslateAmount] = useState(0);
   const [monthArray, setMonthArray] = useState([]);
@@ -264,6 +273,7 @@ const DialogContentDesktop = ({
         isSingle={isSingle}
         highlightToday={highlightToday}
         singleCalendar={singleCalendar}
+        locale={locale}
       />
     ));
   }
@@ -323,7 +333,8 @@ DialogContentDesktop.propTypes = {
   complsOpen: PropTypes.bool,
   dateChanged: PropTypes.instanceOf(Date),
   highlightToday: PropTypes.bool,
-  singleCalendar: PropTypes.bool
+  singleCalendar: PropTypes.bool,
+  locale: PropTypes.string,
 };
 
 DialogContentDesktop.defaultProps = {
@@ -340,6 +351,7 @@ DialogContentDesktop.defaultProps = {
   complsOpen: false,
   dateChanged: null,
   highlightToday: false,
+  locale: 'en',
 };
 
 export default DialogContentDesktop;

@@ -32,6 +32,10 @@ const RangeDatePicker = ({
   hideDialogAfterSelectEndDate,
   isOpen,
   onCloseCalendar,
+  resetLabel,
+  doneLabel,
+  locale,
+  theme,
 }) => {
   const [complsOpen, setComplsOpen] = useState(false);
   const containerRef = useRef(null);
@@ -210,7 +214,7 @@ const RangeDatePicker = ({
   }
 
   return (
-    <div className="react-google-flight-datepicker">
+    <div className={`${(theme == 'light') ? 'react-google-flight-datepicker' : 'react-google-flight-datepicker-dark'}`}>
       <div
         className={cx('date-picker', className, {
           disabled,
@@ -234,7 +238,7 @@ const RangeDatePicker = ({
           inputFocus={inputFocus}
         />
 
-        <DialogWrapper isMobile={isMobile}>
+        <DialogWrapper isMobile={isMobile} theme={theme}>
           <Dialog
             complsOpen={complsOpen}
             toggleDialog={toggleDialog}
@@ -261,6 +265,10 @@ const RangeDatePicker = ({
             hideDialogHeader={hideDialogHeader}
             hideDialogFooter={hideDialogFooter}
             dateInputSeperator={dateInputSeperator}
+            resetLabel={resetLabel}
+            doneLabel={doneLabel}
+            locale={locale}
+            theme={theme}
           />
         </DialogWrapper>
       </div>
@@ -290,6 +298,10 @@ RangeDatePicker.propTypes = {
   hideDialogAfterSelectEndDate: PropTypes.bool,
   isOpen: PropTypes.bool,
   onCloseCalendar: PropTypes.func,
+  resetLabel: PropTypes.string,
+  doneLabel: PropTypes.string,
+  locale: PropTypes.string,
+  theme: PropTypes.string,
 };
 
 RangeDatePicker.defaultProps = {
@@ -314,6 +326,10 @@ RangeDatePicker.defaultProps = {
   hideDialogAfterSelectEndDate: false,
   isOpen: false,
   onCloseCalendar: () => {},
+  resetLabel: 'Reset',
+  doneLabel: 'Done',
+  locale: 'en',
+  theme: 'light',
 };
 
 export default RangeDatePicker;

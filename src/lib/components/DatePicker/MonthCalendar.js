@@ -24,6 +24,7 @@ const MonthCalendar = ({
   isSingle,
   highlightToday,
   singleCalendar,
+  locale,
 }) => {
   function generateWeek() {
     const { totalWeek, totalDay } = getMonthInfo(year, month, startWeekDay);
@@ -52,7 +53,7 @@ const MonthCalendar = ({
   }
 
   function generateWeekDay() {
-    const arrWeekDay = getWeekDay(startWeekDay, weekDayFormat);
+    const arrWeekDay = getWeekDay(startWeekDay, weekDayFormat, locale);
     return arrWeekDay.map((day, index) => (
       <div className="weekday" key={index}>
         {day}
@@ -100,6 +101,7 @@ MonthCalendar.propTypes = {
   isSingle: PropTypes.bool,
   highlightToday: PropTypes.bool,
   singleCalendar: PropTypes.bool,
+  locale: PropTypes.string,
 };
 
 MonthCalendar.defaultProps = {
@@ -118,6 +120,7 @@ MonthCalendar.defaultProps = {
   monthFormat: '',
   isSingle: false,
   highlightToday: false,
+  locale: 'en'
 };
 
 export default MonthCalendar;

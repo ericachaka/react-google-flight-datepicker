@@ -22,7 +22,7 @@ export function getMonthInfo(year, month, startDay) {
   return { totalWeek: weeks, totalDay: numDays };
 }
 
-export function getWeekDay(startWeekDay, weekDayFormat) {
+export function getWeekDay(startWeekDay, weekDayFormat, local='en') {
   let start = 1;
   if (startWeekDay === 'sunday') {
     start = 0;
@@ -30,8 +30,13 @@ export function getWeekDay(startWeekDay, weekDayFormat) {
   for (let i = start; i < start + 7; i++) {
 
   }
-  const arrWeekDay = weekDayFormat === 'dd' ? ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'] :
-    weekDayFormat === 'ddd' ? ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  var arrWeekDay = [];
+  if (local == 'fr'){
+    arrWeekDay = weekDayFormat === 'dd' ? ['Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa', 'Di'] : weekDayFormat === 'ddd' ? ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'] : ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+  }else {
+    arrWeekDay = weekDayFormat === 'dd' ? ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'] : weekDayFormat === 'ddd' ? ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  }
+  
 
   if (startWeekDay === 'sunday') {
     const last = arrWeekDay.pop();
