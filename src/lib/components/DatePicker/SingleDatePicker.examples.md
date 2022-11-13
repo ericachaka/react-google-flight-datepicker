@@ -13,6 +13,7 @@ import { SingleDatePicker } from 'react-google-flight-datepicker';
       doneLabel={`OK`}
       locale={`fr`}
       theme={`light`}
+      onDone={(startDate) => console.log(startDate)}
     />
   </div>
 </div>

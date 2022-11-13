@@ -21,6 +21,7 @@ import { RangeDatePicker } from 'react-google-flight-datepicker';
       doneLabel={`OK`}
       locale={`fr`}
       theme={`light`}
+      onDone={(startDate, endDate) => console.log(startDate, endDate)}
       // monthFormat="MMM --- YY"
     />
   </div>

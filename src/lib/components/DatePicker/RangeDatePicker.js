@@ -36,6 +36,7 @@ const RangeDatePicker = ({
   doneLabel,
   locale,
   theme,
+  onDone,
 }) => {
   const [complsOpen, setComplsOpen] = useState(false);
   const containerRef = useRef(null);
@@ -140,6 +141,10 @@ const RangeDatePicker = ({
   }, [inputFocus]);
 
   function toggleDialog() {
+    const _startDate = fromDateRef.current ? fromDateRef.current.toDate() : null;
+    const _endDate = toDateRef.current ? toDateRef.current.toDate() : null;
+    onDone(_startDate, _endDate);
+
     setComplsOpen(!complsOpen);
   }
 
@@ -284,6 +289,7 @@ RangeDatePicker.propTypes = {
   className: PropTypes.string,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
+  onDone: PropTypes.func,
   onFocus: PropTypes.func,
   startWeekDay: PropTypes.oneOf(['monday', 'sunday']),
   minDate: PropTypes.instanceOf(Date),
@@ -312,6 +318,7 @@ RangeDatePicker.defaultProps = {
   startDatePlaceholder: 'Start date',
   endDatePlaceholder: 'End date',
   onChange: () => {},
+  onDone: () => {},
   onFocus: () => {},
   startWeekDay: 'monday',
   minDate: null,

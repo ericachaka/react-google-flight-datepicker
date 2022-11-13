@@ -31,6 +31,7 @@ const SingleDatePicker = ({
   doneLabel,
   locale,
   theme,
+  onDone,
 }) => {
   const [complsOpen, setComplsOpen] = useState(false);
   const containerRef = useRef(null);
@@ -111,6 +112,8 @@ const SingleDatePicker = ({
   }, [isOpen]);
 
   function toggleDialog() {
+    const _startDate = fromDateRef.current ? fromDateRef.current.toDate() : null;
+    onDone(_startDate);
     setComplsOpen(!complsOpen);
   }
 
@@ -204,6 +207,7 @@ SingleDatePicker.propTypes = {
   className: PropTypes.string,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
+  onDone: PropTypes.func,
   onFocus: PropTypes.func,
   startWeekDay: PropTypes.oneOf(['monday', 'sunday']),
   minDate: PropTypes.instanceOf(Date),
@@ -227,6 +231,7 @@ SingleDatePicker.defaultProps = {
   disabled: false,
   startDatePlaceholder: 'Date',
   onChange: () => {},
+  onDone: () => {},
   onFocus: () => {},
   startWeekDay: 'monday',
   weekDayFormat: 'dd',
